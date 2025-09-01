@@ -3,8 +3,8 @@ using UnityEngine;
 
 public static class GameEvents
 {
-    public static Action GameOver; 
+    public static Action OnGameOver;
 
 
-    
+    public static Action OnPlayerWin;
 }

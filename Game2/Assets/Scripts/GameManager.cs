@@ -8,18 +8,27 @@ public class GameManager : MonoBehaviour
     
     private void OnEnable()
     {
-        GameEvents.GameOver += HandleGameOver;
+        GameEvents.OnGameOver += HandleGameOver;
+        GameEvents.OnPlayerWin += HandleWinGame;
     }
 
     private void OnDisable()
     {
-        GameEvents.GameOver -= HandleGameOver;
+        GameEvents.OnGameOver -= HandleGameOver;
+        GameEvents.OnPlayerWin -= HandleWinGame;
     }
 
     void HandleGameOver()
     {
-        Debug.Log("Game Over triggered by Event!");
+        Debug.Log("Game Over You Lose!");
         Time.timeScale = TIME_STOPPED; 
+    }
+
+    void HandleWinGame()
+    {
+        Debug.Log("Game Over You Win!");
+        Time.timeScale = TIME_STOPPED;
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

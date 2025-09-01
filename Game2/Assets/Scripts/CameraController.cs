@@ -1,12 +1,14 @@
+using System.Net;
 using UnityEngine;
 
 public class CemraController : MonoBehaviour
 {
     public Transform player;
+    public Transform endPointY;
     public float verticalOffset;
     public float scrollSpeed;
-    [SerializeField] private float extraThreshold = 0.5f; 
-
+    [SerializeField] private float extraThreshold = 0.5f;
+    
     void LateUpdate()
     {
         Vector3 newPosition = transform.position;
@@ -27,7 +29,14 @@ public class CemraController : MonoBehaviour
         
         if (player.position.y < cameraBottom - extraThreshold)
         {
-            GameEvents.GameOver?.Invoke();
+            GameEvents.OnGameOver?.Invoke();
+        }
+        if (player.position.y >= endPointY.position.y)
+
+        {
+
+            GameEvents.OnPlayerWin?.Invoke();
+
         }
     }
 }
