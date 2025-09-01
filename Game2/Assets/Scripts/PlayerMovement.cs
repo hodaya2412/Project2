@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [SerializeField] float jumpForce;
+    public float JumpForce => jumpForce;
     Rigidbody2D rb;
     [SerializeField] float speed;
     bool isGrounded = true;

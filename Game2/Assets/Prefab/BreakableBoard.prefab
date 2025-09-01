@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 766463143790628561}
   - component: {fileID: 3393919252819820274}
   - component: {fileID: 6901473297761250990}
+  - component: {fileID: 7115344880344843130}
   m_Layer: 0
-  m_Name: Bored
+  m_Name: BreakableBoard
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,3 +196,15 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &7115344880344843130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8373377871858180800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 240fd722902217547b84def60e8adee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
