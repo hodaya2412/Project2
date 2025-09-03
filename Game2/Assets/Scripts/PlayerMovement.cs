@@ -24,7 +24,18 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogError("RigidBody is null!");
         }
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError("Animator is null!");
+        }
+        sprite = GetComponent<SpriteRenderer>();
+        if (sprite == null)
+        {
+            Debug.LogError("sprite is null!");
+        }
     }
+
 
     private void Awake()
     {
@@ -71,10 +82,18 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
+        HandleMovmentAnimations();
+    }
+
+    private void HandleMovmentAnimations()
+    {
+        animator.SetFloat("Speed", rb.linearVelocity.x);
+        if (directionX != 0)
+        {
+            sprite.flipX = directionX < 0 ? true : false;
+        }
 
     }
-    
-
     private void FixedUpdate()
     {
         rb.linearVelocity = new(directionX * speed, rb.linearVelocity.y);
@@ -84,23 +103,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            // בדיקה אם נוגע מלמעלה
-            foreach (ContactPoint2D contact in other.contacts)
-            {
-                if (contact.normal.y > 0.7f) // נגיעה מלמעלה
-                {
+                
                     isGrounded = true;
-                }
-            }
+            
         }
     }
 
-
-
     private void Jump()
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         isGrounded = false;
+        animator.SetTrigger("IsJumping");
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        
     }
 
     public IEnumerator ApplyJumpBoost(float multiplier, float duration)
@@ -118,4 +132,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(duration);
         speed /= multiplier;
     }
+
+
+
 }

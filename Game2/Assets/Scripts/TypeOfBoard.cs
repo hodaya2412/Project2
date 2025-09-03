@@ -23,13 +23,13 @@ public class TypeOfBoard : MonoBehaviour
         float roll = Random.value;
 
 
-        if (roll < 0.33)
+        if (roll < 0.60)
         {
             moveHorizontally = false;
             moveVertically = false;
         }
 
-        else if (roll < 0.66)
+        else if (roll < 0.80)
         {
             moveHorizontally = true;
             moveVertically = false;
@@ -55,4 +55,13 @@ public class TypeOfBoard : MonoBehaviour
             transform.position = new Vector2(startPosition.x , startPosition.y + offset);
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") )
+        {
+            collision.transform.SetParent(transform);
+        }
+    }
+
+
 }
