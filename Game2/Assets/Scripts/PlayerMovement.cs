@@ -1,14 +1,14 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
 
-    [SerializeField] float jumpForce;
-    public float JumpForce => jumpForce;
+    public float jumpForce =14f;
     Rigidbody2D rb;
-    [SerializeField] float speed;
+    public float speed = 5f;
     bool isGrounded = true;
     float directionX;
     Animator animator;
@@ -84,7 +84,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            isGrounded = true;
+            // בדיקה אם נוגע מלמעלה
+            foreach (ContactPoint2D contact in other.contacts)
+            {
+                if (contact.normal.y > 0.7f) // נגיעה מלמעלה
+                {
+                    isGrounded = true;
+                }
+            }
         }
     }
 
@@ -94,5 +101,21 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         isGrounded = false;
+    }
+
+    public IEnumerator ApplyJumpBoost(float multiplier, float duration)
+    {
+        Debug.Log("you got Jump Boost!");
+        jumpForce *= multiplier;
+        yield return new WaitForSeconds(duration);
+        jumpForce /= multiplier;
+    }
+
+    public IEnumerator ApplySpeedBoost(float multiplier, float duration)
+    {
+        Debug.Log("you got Speed Boost!");
+        speed *= multiplier;
+        yield return new WaitForSeconds(duration);
+        speed /= multiplier;
     }
 }

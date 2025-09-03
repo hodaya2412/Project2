@@ -1,7 +1,8 @@
+using System.Collections;
 using System.Net;
 using UnityEngine;
 
-public class CemraController : MonoBehaviour
+public class CamraController : MonoBehaviour
 {
     public Transform player;
     public Transform endPointY;
@@ -39,4 +40,18 @@ public class CemraController : MonoBehaviour
 
         }
     }
+    public void ApplySlowEffect(float factor, float duration)
+    {
+        StartCoroutine(SlowCameraRoutine(factor, duration));
+    }
+
+    private IEnumerator SlowCameraRoutine(float factor, float duration)
+    {
+        Debug.Log("you got Slower Camera!");
+        float originalSpeed = scrollSpeed;
+        scrollSpeed *= factor; // מכפיל את מהירות הסקרול לפי הפקטור
+        yield return new WaitForSeconds(duration);
+        scrollSpeed = originalSpeed; // מחזיר למהירות המקורית
+    }
+
 }
