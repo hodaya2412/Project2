@@ -6,6 +6,8 @@ public class TypeOfBoard : MonoBehaviour
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float moveRange = 2f;
 
+    private double standPlatformPercent = 0.6;
+    private double HorizontallyPlatformPercent = 0.8;
     private bool moveHorizontally = false;
     private bool moveVertically = false;
 
@@ -23,13 +25,13 @@ public class TypeOfBoard : MonoBehaviour
         float roll = Random.value;
 
 
-        if (roll < 0.60)
+        if (roll < standPlatformPercent)
         {
             moveHorizontally = false;
             moveVertically = false;
         }
 
-        else if (roll < 0.80)
+        else if (roll < HorizontallyPlatformPercent)
         {
             moveHorizontally = true;
             moveVertically = false;

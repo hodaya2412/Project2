@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float jumpForce =14f;
+    [SerializeField] float jumpForce;
     Rigidbody2D rb;
-    public float speed = 5f;
+    [SerializeField] float speed ;
     bool isGrounded = true;
     float directionX;
     Animator animator;
@@ -103,7 +103,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-                
                     isGrounded = true;
             
         }
@@ -113,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = false;
         animator.SetTrigger("IsJumping");
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         
     }
 
@@ -132,7 +131,13 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(duration);
         speed /= multiplier;
     }
-
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("WinFlag"))
+        {
+            GameEvents.OnPlayerWin?.Invoke();
+        }
+    }
 
 
 }

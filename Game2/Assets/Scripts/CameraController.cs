@@ -32,13 +32,6 @@ public class CamraController : MonoBehaviour
         {
             GameEvents.OnGameOver?.Invoke();
         }
-        if (player.position.y >= endPointY.position.y)
-
-        {
-
-            GameEvents.OnPlayerWin?.Invoke();
-
-        }
     }
     public void ApplySlowEffect(float factor, float duration)
     {
@@ -49,9 +42,9 @@ public class CamraController : MonoBehaviour
     {
         Debug.Log("you got Slower Camera!");
         float originalSpeed = scrollSpeed;
-        scrollSpeed *= factor; // מכפיל את מהירות הסקרול לפי הפקטור
+        scrollSpeed *= factor; 
         yield return new WaitForSeconds(duration);
-        scrollSpeed = originalSpeed; // מחזיר למהירות המקורית
+        scrollSpeed = originalSpeed;
     }
 
 }

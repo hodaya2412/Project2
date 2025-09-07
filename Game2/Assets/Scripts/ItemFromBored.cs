@@ -1,17 +1,21 @@
 using UnityEngine;
 
 public class ItemFromBored : MonoBehaviour
+   
 {
-    public enum ItemType { 
-        Gift, 
-        Bomb 
+    private float minRange = 0;
+    private float maxRange = 3;
+    public enum ItemType
+    {
+        Gift,
+        Poison
     }
     public ItemType itemType;
     public float slowCameraFactor = 0.5f;
     public float slowCameraDuration = 5f;
 
     public float jumpMultiplier = 1.5f;
-    public float boostJumpDuration = 5f;
+    public float boostJumpDuration = 2f;
 
     public float speedMultiplier = 1.5f;
     public float speedBoostDuration = 5f;
@@ -23,14 +27,14 @@ public class ItemFromBored : MonoBehaviour
         if (itemType == ItemType.Gift)
         {
             
-            chosenGift = (GiftType)Random.Range(0, 3);
+            chosenGift = (GiftType)Random.Range(minRange, maxRange);
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            if (itemType == ItemType.Bomb)
+            if (itemType == ItemType.Poison)
             {
                 GameEvents.OnGameOver?.Invoke();
             }
