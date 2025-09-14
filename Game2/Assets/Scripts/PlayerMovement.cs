@@ -8,8 +8,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float jumpForce;
     Rigidbody2D rb;
-    [SerializeField] float speed ;
-    bool isGrounded = true;
+    [SerializeField] float speed;
+    [SerializeField] bool isGrounded = true;
     float directionX;
     Animator animator;
     SpriteRenderer sprite;
@@ -103,8 +103,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-                    isGrounded = true;
-            
+            isGrounded = true;
+
         }
     }
 
@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = false;
         animator.SetTrigger("IsJumping");
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        
+
     }
 
     public IEnumerator ApplyJumpBoost(float multiplier, float duration)

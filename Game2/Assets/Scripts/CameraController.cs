@@ -9,9 +9,12 @@ public class CamraController : MonoBehaviour
     public float verticalOffset;
     public float scrollSpeed;
     [SerializeField] private float extraThreshold = 0.5f;
+    bool isGameOver = false;
     
     void LateUpdate()
     {
+        if (isGameOver)
+            return;
         Vector3 newPosition = transform.position;
 
        
@@ -31,6 +34,7 @@ public class CamraController : MonoBehaviour
         if (player.position.y < cameraBottom - extraThreshold)
         {
             GameEvents.OnGameOver?.Invoke();
+            isGameOver = true;
         }
     }
     public void ApplySlowEffect(float factor, float duration)
